@@ -3,6 +3,8 @@
 [ext_resource type="MeshLibrary" uid="uid://e6ds6vhdfysp" path="res://src/assets/maintiles.tres" id="1_cpdsr"]
 [ext_resource type="PackedScene" uid="uid://63g777irew16" path="res://src/scenes/player.tscn" id="2_vqic3"]
 [ext_resource type="Script" uid="uid://by7hucfjepqt1" path="res://src/scripts/camera.gd" id="3_2bdhb"]
+[ext_resource type="PackedScene" uid="uid://vwrr7d0k0djx" path="res://src/scenes/hud.tscn" id="4_whyo8"]
+[ext_resource type="Theme" uid="uid://l21a7hgw8abe" path="res://src/assets/font_theme.tres" id="5_gbjbi"]
 
 [node name="NewMap" type="Node" unique_id=351599421]
 
@@ -25,3 +27,6 @@ script = ExtResource("3_2bdhb")
 transform = Transform3D(1, 0, 0, 0, 0.8253796, 0.5645781, 0, -0.5645781, 0.8253796, 0, 10.523508, -0.29525328)
 shadow_enabled = true
 shadow_blur = 0.0
+
+[node name="HUD" parent="." unique_id=1630500089 instance=ExtResource("4_whyo8")]
+theme = ExtResource("5_gbjbi")
