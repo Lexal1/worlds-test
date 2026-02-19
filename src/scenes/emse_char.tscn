@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://c6qpeaueturml"]
+
+[ext_resource type="Script" uid="uid://bc8kb6jujta8d" path="res://src/scripts/emse_char.gd" id="1_a01ba"]
+[ext_resource type="Texture2D" uid="uid://myevh6va646s" path="res://src/assets/froslass_sprite/Idle-Anim.png" id="1_voyr0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_couqd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywxrc"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykv8d"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg3o1"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yqmu"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug2ni"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l575"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7nnl"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(192, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsnvy"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(224, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odqrw"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(256, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7r47"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(288, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bycnp"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(320, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fx52"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(352, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21h6v"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(384, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epct2"]
+atlas = ExtResource("1_voyr0")
+region = Rect2(416, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hcobe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywxrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykv8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cg3o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yqmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug2ni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l575")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7nnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsnvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odqrw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7r47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bycnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fx52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21h6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epct2")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kanu3"]
+radius = 0.0491602
+height = 0.185909
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dp5e1"]
+
+[node name="EmseFroslass" type="StaticBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_couqd")
+script = ExtResource("1_a01ba")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_hcobe")
+animation = &"idle_down"
+frame_progress = 0.10939
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kanu3")
+
+[node name="Area3D" type="Area3D" parent="." groups=["areagroup"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_dp5e1")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

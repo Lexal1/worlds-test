@@ -15,9 +15,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="worlds-test"
-run/main_scene="res://main_2.tscn"
+run/main_scene="res://src/scenes/main_2.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://src/assets/icon.svg"
 
 [editor_plugins]
 

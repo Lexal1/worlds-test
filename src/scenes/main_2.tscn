@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dcbqw273oxvhb"]
+
+[ext_resource type="Script" uid="uid://djn5enhav6cj7" path="res://src/scripts/main_2.gd" id="1_1c31k"]
+[ext_resource type="PackedScene" uid="uid://63g777irew16" path="res://src/scenes/player.tscn" id="2_3ach3"]
+[ext_resource type="Script" uid="uid://by7hucfjepqt1" path="res://src/scripts/camera.gd" id="3_7nhu8"]
+[ext_resource type="PackedScene" uid="uid://b7os0rtjb0pq0" path="res://src/scenes/map.tscn" id="4_j350s"]
+[ext_resource type="Texture2D" uid="uid://eq8kamtntl1b" path="res://src/assets/sky-placeholder.jpg" id="5_61wr2"]
+[ext_resource type="PackedScene" uid="uid://vwrr7d0k0djx" path="res://src/scenes/hud.tscn" id="6_dnapd"]
+[ext_resource type="Theme" uid="uid://l21a7hgw8abe" path="res://src/assets/font_theme.tres" id="7_8m17r"]
+[ext_resource type="PackedScene" uid="uid://c6qpeaueturml" path="res://src/scenes/emse_char.tscn" id="8_n4mtj"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ahlbr"]
+panorama = ExtResource("5_61wr2")
+filter = false
+
+[sub_resource type="Sky" id="Sky_gq0q3"]
+sky_material = SubResource("PanoramaSkyMaterial_ahlbr")
+
+[sub_resource type="Environment" id="Environment_y25nl"]
+background_mode = 2
+background_color = Color(0.347806, 0.187261, 0.565218, 1)
+sky = SubResource("Sky_gq0q3")
+ambient_light_source = 3
+ambient_light_color = Color(0.580362, 0.319719, 0.696764, 1)
+fog_enabled = true
+fog_light_color = Color(0.314061, 0.29431, 0.492482, 1)
+
+[node name="Main2" type="Node" unique_id=1229115223]
+script = ExtResource("1_1c31k")
+
+[node name="Player" parent="." unique_id=1248613880 groups=["areagroup"] instance=ExtResource("2_3ach3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517726, 0)
+
+[node name="Pivot" type="Node3D" parent="Player" unique_id=1034968867]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Pivot" unique_id=1165052047]
+transform = Transform3D(1, 0, 0, 0, 0.944806, 0.32763, 0, -0.32763, 0.944806, 0, 0.857948, 1.46107)
+script = ExtResource("3_7nhu8")
+
+[node name="Map" parent="." unique_id=1099613146 instance=ExtResource("4_j350s")]
+transform = Transform3D(0.373212, 0, 0, 0, 0.647368, 0, 0, 0, 0.431593, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2062504214]
+transform = Transform3D(1, 0, 0, 0, 0.10708, 0.99425, 0, -0.99425, 0.10708, 0, 5.27197, 0)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1103181293]
+environment = SubResource("Environment_y25nl")
+
+[node name="HUD" parent="." unique_id=2008775186 instance=ExtResource("6_dnapd")]
+theme = ExtResource("7_8m17r")
+
+[node name="EmseChar" parent="." unique_id=450995413 instance=ExtResource("8_n4mtj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33057, -0.0422673, -1.42797)
+
+[connection signal="body_entered" from="EmseChar" to="." method="_on_emse_char_body_entered"]
