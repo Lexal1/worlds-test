@@ -1,0 +1,56 @@
+[gd_scene load_steps=12 format=3 uid="uid://dcbqw273oxvhb"]
+
+[ext_resource type="Script" path="res://main_2.gd" id="1_kvjev"]
+[ext_resource type="PackedScene" uid="uid://63g777irew16" path="res://player.tscn" id="1_namb4"]
+[ext_resource type="PackedScene" uid="uid://b7os0rtjb0pq0" path="res://map.tscn" id="2_3ywjd"]
+[ext_resource type="Script" path="res://camera.gd" id="2_qc6ld"]
+[ext_resource type="Texture2D" uid="uid://eq8kamtntl1b" path="res://sky-placeholder.jpg" id="3_5s2ge"]
+[ext_resource type="PackedScene" uid="uid://vwrr7d0k0djx" path="res://hud.tscn" id="5_87jrn"]
+[ext_resource type="Theme" uid="uid://l21a7hgw8abe" path="res://font_theme.tres" id="6_m8ls5"]
+[ext_resource type="PackedScene" uid="uid://c6qpeaueturml" path="res://emse_char.tscn" id="7_bbi5v"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ahlbr"]
+panorama = ExtResource("3_5s2ge")
+filter = false
+
+[sub_resource type="Sky" id="Sky_gq0q3"]
+sky_material = SubResource("PanoramaSkyMaterial_ahlbr")
+
+[sub_resource type="Environment" id="Environment_y25nl"]
+background_mode = 2
+background_color = Color(0.347806, 0.187261, 0.565218, 1)
+sky = SubResource("Sky_gq0q3")
+ambient_light_source = 3
+ambient_light_color = Color(0.580362, 0.319719, 0.696764, 1)
+fog_enabled = true
+fog_light_color = Color(0.314061, 0.29431, 0.492482, 1)
+
+[node name="Main2" type="Node"]
+script = ExtResource("1_kvjev")
+
+[node name="Player" parent="." groups=["areagroup"] instance=ExtResource("1_namb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517726, 0)
+
+[node name="Pivot" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.944806, 0.32763, 0, -0.32763, 0.944806, 0, 0.857948, 1.46107)
+script = ExtResource("2_qc6ld")
+
+[node name="Map" parent="." instance=ExtResource("2_3ywjd")]
+transform = Transform3D(0.373212, 0, 0, 0, 0.647368, 0, 0, 0, 0.431593, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.10708, 0.99425, 0, -0.99425, 0.10708, 0, 5.27197, 0)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y25nl")
+
+[node name="HUD" parent="." instance=ExtResource("5_87jrn")]
+theme = ExtResource("6_m8ls5")
+
+[node name="EmseChar" parent="." instance=ExtResource("7_bbi5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33057, -0.0422673, -1.42797)
+
+[connection signal="body_entered" from="EmseChar" to="." method="_on_emse_char_body_entered"]

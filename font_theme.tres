@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://l21a7hgw8abe"]
+
+[ext_resource type="FontFile" uid="uid://dfvagv7627avg" path="res://wondermail.ttf" id="1_g6yyh"]
+
+[resource]
+default_font = ExtResource("1_g6yyh")
+default_font_size = 32

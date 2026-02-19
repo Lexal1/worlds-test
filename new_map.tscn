@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://h0ofjwap60ig"]
+
+[ext_resource type="MeshLibrary" uid="uid://e6ds6vhdfysp" path="res://maintiles.tres" id="1_cpdsr"]
+[ext_resource type="PackedScene" uid="uid://63g777irew16" path="res://player.tscn" id="2_vqic3"]
+[ext_resource type="Script" uid="uid://by7hucfjepqt1" path="res://camera.gd" id="3_2bdhb"]
+
+[node name="NewMap" type="Node" unique_id=351599421]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1053485801]
+mesh_library = ExtResource("1_cpdsr")
+data = {
+"cells": PackedInt32Array(0, 0, 0, 0, 1, 0, 65535, 65535, 0, 0, 65535, 0, 65535, 0, 0, 65534, 65535, 0, 65534, 65534, 0, 65533, 65534, 0, 0, 65534, 0, 0, 65533, 0, 65535, 65533, 0, 65534, 65533, 0, 65535, 65534, 0, 65535, 1, 0, 65534, 1, 0, 65534, 0, 0, 65533, 65535, 0, 65533, 0, 0, 65533, 1, 0, 65533, 65533, 0, 65533, 2, 0, 65534, 2, 0, 65533, 65532, 0, 65534, 65532, 0, 65535, 65532, 0, 0, 65532, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 1, 1, 0, 1, 2, 0, 0, 3, 0, 65535, 2, 0, 0, 2, 0, 65534, 3, 0, 65535, 3, 0, 1, 3, 0, 65533, 3, 0)
+}
+
+[node name="Player" parent="." unique_id=1873221467 groups=["areagroup"] instance=ExtResource("2_vqic3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.969142, 0)
+
+[node name="Pivot" type="Node3D" parent="Player" unique_id=1968162650]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Pivot" unique_id=179642305]
+transform = Transform3D(1, 0, 0, 0, 0.944806, 0.32763, 0, -0.32763, 0.944806, 0, 0.857948, 1.46107)
+script = ExtResource("3_2bdhb")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1806224266]
+transform = Transform3D(1, 0, 0, 0, 0.8253796, 0.5645781, 0, -0.5645781, 0.8253796, 0, 10.523508, -0.29525328)
+shadow_enabled = true
+shadow_blur = 0.0

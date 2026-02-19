@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dinjwyan3nw21"]
+
+[ext_resource type="PackedScene" uid="uid://63g777irew16" path="res://player.tscn" id="1_yyrhi"]
+[ext_resource type="Script" path="res://camera.gd" id="2_ycsmu"]
+[ext_resource type="PackedScene" uid="uid://cpcolxpfxtbcy" path="res://floor.tscn" id="3_vphfr"]
+[ext_resource type="PackedScene" uid="uid://vwrr7d0k0djx" path="res://hud.tscn" id="4_ljopy"]
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_yyrhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11621, 0)
+
+[node name="Pivot" type="Node3D" parent="Player"]
+
+[node name="Camera" type="Camera3D" parent="Player/Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.983888, 0.178785, 0, -0.178785, 0.983888, 0, 0.271502, 0.968411)
+script = ExtResource("2_ycsmu")
+
+[node name="Floor" parent="." instance=ExtResource("3_vphfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14367, 0, 0)
+
+[node name="Floor2" parent="." instance=ExtResource("3_vphfr")]
+transform = Transform3D(0.961093, 0.276224, 0, -0.276224, 0.961093, 0, 0, 0, 1, -1.78121, 0.232274, 0)
+
+[node name="HUD" parent="." instance=ExtResource("4_ljopy")]
+
+[node name="Floor3" parent="." instance=ExtResource("3_vphfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.73338, 0.512381, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.179747, 0.983713, 0, -0.983713, 0.179747, 0, 3.42366, 0)
