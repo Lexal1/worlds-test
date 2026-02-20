@@ -34,9 +34,9 @@ points = PackedVector3Array(0.79999995, 3.7, 0.2997067, -2.2, 3.7, 0.2997067, 0.
 [resource]
 item/0/name = "Grasstile"
 item/0/mesh = SubResource("ArrayMesh_l427r")
-item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/mesh_transform = Transform3D(0.675, 0, 0, 0, 0.675, 0, 0, 0, 0.675, 0, 0, 0)
 item/0/mesh_cast_shadow = 1
 item/0/shapes = [SubResource("ConvexPolygonShape3D_nlho0"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
-item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_mesh_transform = Transform3D(0.675, 0, 0, 0, 0.675, 0, 0, 0, 0.675, 0, 0, 0)
 item/0/navigation_layers = 1
 item/0/preview = SubResource("ImageTexture_43gyc")
