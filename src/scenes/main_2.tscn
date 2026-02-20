@@ -29,12 +29,12 @@ fog_light_color = Color(0.314061, 0.29431, 0.492482, 1)
 script = ExtResource("1_1c31k")
 
 [node name="Player" parent="." unique_id=1248613880 groups=["areagroup"] instance=ExtResource("2_3ach3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517726, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="Pivot" type="Node3D" parent="Player" unique_id=1034968867]
 
 [node name="Camera3D" type="Camera3D" parent="Player/Pivot" unique_id=1165052047]
-transform = Transform3D(1, 0, 0, 0, 0.944806, 0.32763, 0, -0.32763, 0.944806, 0, 0.857948, 1.46107)
+transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 0, 1.2, 1.5)
 script = ExtResource("3_7nhu8")
 
 [node name="Map" parent="." unique_id=1099613146 instance=ExtResource("4_j350s")]
