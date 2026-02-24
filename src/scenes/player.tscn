@@ -401,6 +401,9 @@ tracks/0/keys = {
 "values": [Vector2i(0, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_4vu8n"]
+resource_name = "idle_north"
+
 [sub_resource type="Animation" id="Animation_l2v1k"]
 resource_name = "walk_east"
 length = 0.4
@@ -548,6 +551,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l2v1k"]
 _data = {
 &"RESET": SubResource("Animation_v4rts"),
+&"idle_north": SubResource("Animation_4vu8n"),
 &"walk_east": SubResource("Animation_l2v1k"),
 &"walk_north": SubResource("Animation_hwyk6"),
 &"walk_northeast": SubResource("Animation_ya6j6"),
