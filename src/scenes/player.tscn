@@ -386,11 +386,50 @@ animations = [{
 radius = 0.104108
 height = 0.406992
 
+[sub_resource type="Animation" id="Animation_v4rts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_hwyk6"]
+resource_name = "walk_north"
+length = 0.4
+step = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667, 0.13333334, 0.20000002, 0.26666668, 0.33333334, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4), Vector2i(5, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l2v1k"]
+_data = {
+&"RESET": SubResource("Animation_v4rts"),
+&"walk_north": SubResource("Animation_hwyk6")
+}
+
 [node name="Player" type="CharacterBody3D" unique_id=1724331247]
 script = ExtResource("1_vys7w")
 
-[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=899885164]
+[node name="SpriteOld" type="AnimatedSprite3D" parent="." unique_id=899885164]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1425012, 0)
+visible = false
 billboard = 1
 alpha_cut = 2
 texture_filter = 0
@@ -401,4 +440,15 @@ animation = &"walk_down"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040634036, 0)
 shape = SubResource("CapsuleShape3D_yl0g7")
 
-[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
+[node name="Sprite" type="Sprite3D" parent="." unique_id=1185760567]
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_ssxk1")
+hframes = 6
+vframes = 8
+frame = 24
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2003145413]
+libraries/ = SubResource("AnimationLibrary_l2v1k")
+
+[connection signal="animation_finished" from="SpriteOld" to="." method="_on_sprite_animation_finished"]

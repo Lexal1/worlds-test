@@ -1,7 +1,12 @@
 extends CharacterBody3D
 
-var SPEED = 2.0
-const JUMP_VELOCITY = 4.5
+var SPEED = 5.0
+var ACCELERATION = 5.0
+const JUMP_VELOCITY = 8
+var jumping = false
+var last_floor = true
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+const GRAVITY_MULTIPLIER = 1.5
 
 func update_sprite(direction: Vector3) -> void:
 	#if direction.x != 0 and direction.y != 0 and direction.z != 0:
@@ -34,10 +39,16 @@ func update_sprite(direction: Vector3) -> void:
 	if direction.z < 0:
 		$Sprite.play("walk_up")
 		return
-
+func get_move_input(delta):
+	#var vy = velocity.y
+	#velocity.y = 0
+	var input = Input.get_vector("left", "right", "forward", "backward")
+	var dir = Vector3(input.x, 0, input.y).rotated(Vector3.UP, $Pivot.rotation.y)
+	velocity = lerp(velocity, dir * SPEED, ACCELERATION * delta)
 func _physics_process(delta: float) -> void:
 	## Add the gravity.
-	if not is_on_floor():
+	"""if not is_on_floor():
+		print("not on floor")
 		velocity += get_gravity() * delta
 	if Input.is_action_pressed("button_2"):
 		SPEED = 6.0
@@ -59,6 +70,18 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	update_sprite(direction)
+	move_and_slide()"""
+	$AnimationPlayer.play("walk_north")
+	#velocity.y += -gravity * delta
+	get_move_input(delta)
+	if not is_on_floor():
+		velocity.y += -gravity * delta * GRAVITY_MULTIPLIER
+	if Input.is_action_just_pressed("button_1") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		jumping = true
+	if is_on_floor() and not last_floor:
+		jumping = false
+	last_floor = is_on_floor()
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("temp_cam_left"):
