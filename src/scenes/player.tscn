@@ -422,6 +422,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_hwyk6"]
 resource_name = "walk_north"
 length = 0.4
+loop_mode = 1
 step = 0.06666667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -493,6 +494,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_xvyn7"]
 resource_name = "walk_southeast"
 length = 0.4
+loop_mode = 1
 step = 0.06666667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -556,6 +558,61 @@ _data = {
 &"walk_west": SubResource("Animation_4pcbe")
 }
 
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_v4rts"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v4rts"]
+animation = &"walk_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hwyk6"]
+animation = &"walk_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l2v1k"]
+animation = &"walk_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ya6j6"]
+animation = &"walk_west"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0qy4j"]
+animation = &"walk_southwest"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8v6aa"]
+animation = &"walk_southeast"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4pcbe"]
+animation = &"walk_northeast"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xvyn7"]
+animation = &"walk_northwest"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_0qy4j"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_v4rts")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_hwyk6")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_l2v1k")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_ya6j6")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_0qy4j")
+blend_point_4/pos = Vector2(-0.4, 0.6)
+blend_point_5/node = SubResource("AnimationNodeAnimation_8v6aa")
+blend_point_5/pos = Vector2(0.4, 0.6)
+blend_point_6/node = SubResource("AnimationNodeAnimation_4pcbe")
+blend_point_6/pos = Vector2(0.5, -0.5)
+blend_point_7/node = SubResource("AnimationNodeAnimation_xvyn7")
+blend_point_7/pos = Vector2(-0.5, -0.6)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8v6aa"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ya6j6"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_v4rts")
+states/Idle/position = Vector2(359.77777, 169.33334)
+states/Walk/node = SubResource("AnimationNodeBlendSpace2D_0qy4j")
+states/Walk/position = Vector2(360.66666, 54.666668)
+transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_8v6aa")]
+
 [node name="Player" type="CharacterBody3D" unique_id=1724331247]
 script = ExtResource("1_vys7w")
 
@@ -582,5 +639,12 @@ frame = 24
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2003145413]
 libraries/ = SubResource("AnimationLibrary_l2v1k")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=481742953]
+tree_root = SubResource("AnimationNodeStateMachine_ya6j6")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(-0.002306819, 0.023255825)
 
 [connection signal="animation_finished" from="SpriteOld" to="." method="_on_sprite_animation_finished"]

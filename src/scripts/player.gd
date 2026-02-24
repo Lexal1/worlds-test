@@ -7,7 +7,9 @@ var jumping = false
 var last_floor = true
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const GRAVITY_MULTIPLIER = 1.5
-
+func _init() -> void:
+	#$AnimationTree.start()
+	pass
 func update_sprite(direction: Vector3) -> void:
 	#if direction.x != 0 and direction.y != 0 and direction.z != 0:
 	#print(direction)
@@ -39,11 +41,15 @@ func update_sprite(direction: Vector3) -> void:
 	if direction.z < 0:
 		$Sprite.play("walk_up")
 		return
+func get_direction_vector():
+	print("dir vec")
+	return Input.get_vector("left", "right", "forward", "backward")
 func get_move_input(delta):
 	#var vy = velocity.y
 	#velocity.y = 0
 	var input = Input.get_vector("left", "right", "forward", "backward")
 	var dir = Vector3(input.x, 0, input.y).rotated(Vector3.UP, $Pivot.rotation.y)
+	#print(dir)
 	velocity = lerp(velocity, dir * SPEED, ACCELERATION * delta)
 func _physics_process(delta: float) -> void:
 	## Add the gravity.
@@ -71,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	update_sprite(direction)
 	move_and_slide()"""
-	$AnimationPlayer.play("walk_north")
+	#$AnimationPlayer.play("walk_north")
 	#velocity.y += -gravity * delta
 	get_move_input(delta)
 	if not is_on_floor():
@@ -90,7 +96,10 @@ func _physics_process(delta: float) -> void:
 		$Pivot.rotation += Vector3(0,45,0)
 	
 	if position.y <= -10: ## dont fall out of the world dumbass
-		get_tree().reload_current_scene() 
+		get_tree().reload_current_scene()
+	$AnimationTree.set("parameters/Walk/blend_position", get_direction_vector().normalized())
+	print("%d, %d" % [velocity.x, velocity.z])
 
 func _on_sprite_animation_finished() -> void:
-	$Sprite.stop()
+	#$Sprite.stop()
+	pass
